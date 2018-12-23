@@ -189,6 +189,32 @@ public class FirstTest {
         Assert.assertTrue("search result is not missing", foundElementsAfterClearField == 0);
     }
 
+    @Test
+    public  void wordSearchInSearch(){
+
+        String valueForSearch = "Selenium";
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find Search Wikipedia input",
+                15
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search…')]"),
+                valueForSearch,
+                "Cannot find search input",
+                5
+        );
+
+        List<WebElement> foundElements = driver.findElements(By.id("org.wikipedia:id/page_list_item_title"));
+        for(WebElement element:foundElements){
+            String text =  element.getAttribute("text");
+            Assert.assertTrue("not found desired word" + valueForSearch + "found value is: " + element, text.contains(valueForSearch));
+        }
+
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSecod){
 
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSecod);
