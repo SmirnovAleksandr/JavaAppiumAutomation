@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.sql.Driver;
+import java.util.List;
 
 public class FirstTest {
 
@@ -153,6 +155,39 @@ public class FirstTest {
                placeholder_text
        );
    }
+
+    @Test
+    public  void  cancelSearch(){
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find Search Wikipedia input",
+                15
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search…')]"),
+                "Selenium",
+                "Cannot find search input",
+                5
+        );
+
+       List<WebElement> foundElements = driver.findElements(By.id("org.wikipedia:id/page_list_item_title"));
+               for(WebElement element:foundElements){
+                   String text =  element.getAttribute("text");
+                   Assert.assertTrue("search didn't find results",!text.isEmpty());
+               }
+
+        waitForElementAndClear(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Cannot fina searchfield",
+                5
+        );
+
+
+       int foundElementsAfterClearField = driver.findElements(By.id("org.wikipedia:id/page_list_item_title")).size();
+        Assert.assertTrue("search result is not missing", foundElementsAfterClearField == 0);
+    }
 
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSecod){
 
