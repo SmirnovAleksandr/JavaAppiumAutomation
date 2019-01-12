@@ -34,6 +34,7 @@ public class FirstTest {
         capabilities.setCapability("app", "E:\\D\\курсы\\автоматизация\\Автоматизатор мобильных приложений\\0. Введение в Java и JUnit\\JavaAppiumAutomation\\apks\\org.wikipedia.apk");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @After
@@ -417,8 +418,7 @@ public class FirstTest {
                 By.xpath("//*[@text='Java (programming language)']"),
                 "Cannot find saved article"
 
-        );
-*/
+        );*/
     }
 
 
