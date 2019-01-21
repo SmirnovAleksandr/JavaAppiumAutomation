@@ -44,6 +44,10 @@ public class ArticlePageObject extends MainPageObject{
         return this.waitForElementPresent(By.id(TITLE), "cannot find article title on page", 15);
 }
 
+    public WebElement waitForTitleElement(int timeout){
+
+        return this.waitForElementPresent(By.id(TITLE), "cannot find article title on page", timeout);
+    }
 
 
 public String getArticleTitle(){
