@@ -71,7 +71,6 @@ public class SearchTests  extends CoreTestCase {
 
     }
 
-
     @Test
     public void testWordSearchInSearch() {
 
@@ -83,6 +82,21 @@ public class SearchTests  extends CoreTestCase {
         List<String> titles = SearchPageObject.getTitlesOfFoundArticles();
         assertTrue("Тot every search result has value." + valueForSearch , titles.contains(valueForSearch));
 
+    }
+
+    @Test
+    public  void testResultsPresentInSearch(){
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        String search_line = "Bali";
+        SearchPageObject.typeSearchLine(search_line);
+        int count_of_articles = SearchPageObject.getAmountOfFoundArticles();
+        assertTrue("Count of articles less then three", count_of_articles >=3);
+
+        SearchPageObject.waitForElementByTitleAndDescription("Bali", "Island of Indonesia, located in Bali Province");
+        SearchPageObject.waitForElementByTitleAndDescription("Baltimore", "City in Maryland, United States");
+        SearchPageObject.waitForElementByTitleAndDescription("Baltimore Orioles", "Baseball team and Major League Baseball franchise in Baltimore, Maryland, United States");
     }
 
 }

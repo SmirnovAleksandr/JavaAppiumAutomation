@@ -1,0 +1,1 @@
+https://github.com/SmirnovAleksandr/JavaAppiumAutomation/tree/master/src

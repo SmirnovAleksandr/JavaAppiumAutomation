@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 public class MyListsPageObject extends MainPageObject{
 
     public  static  final  String
-                FOLDER_BY_NAME_TPL = "//*[@text='{FOLDER_NAME}']",
-                ARTICLE_BY_TITLE_TPL = "//*[@text='{TITLE}']"
+                FOLDER_BY_NAME_TPL = "xpath://*[@text='{FOLDER_NAME}']",
+                ARTICLE_BY_TITLE_TPL = "xpath://*[@text='{TITLE}']"
     ;
 
 
@@ -34,7 +34,7 @@ public class MyListsPageObject extends MainPageObject{
        String folder_name_xpath = getFolderXpathByName(name_of_folder);
 
         this.waitForElementAndClick(
-                By.xpath(folder_name_xpath),
+                folder_name_xpath,
                 "Cannot find folder by name " + name_of_folder,
                 5
         );
@@ -44,13 +44,13 @@ public class MyListsPageObject extends MainPageObject{
 
     public void waitForArticleToAppearByTitle(String article_title){
         String article__xpath = getFolderXpathByName(article_title);
-        this.waitForElementPresent(By.xpath(article__xpath), "Cannot find saved article by title " + article_title, 15);
+        this.waitForElementPresent((article__xpath), "Cannot find saved article by title " + article_title, 15);
 
     }
 
     public void waitForArticleToDisappearByTitle(String article_title){
         String article__xpath = getFolderXpathByName(article_title);
-        this.waitForElementNotPresent(By.xpath(article__xpath), "Saved article still present with title " + article_title, 15);
+        this.waitForElementNotPresent((article__xpath), "Saved article still present with title " + article_title, 15);
 
     }
 
@@ -61,7 +61,7 @@ public class MyListsPageObject extends MainPageObject{
         String article_xpath = getFolderXpathByName(article_title);
 
        this.swipeElementToLeft(
-               By.xpath(article_xpath),
+               (article_xpath),
                "Cannot find saved article"
        );
         this.waitForArticleToDisappearByTitle(article_title);
@@ -71,7 +71,7 @@ public class MyListsPageObject extends MainPageObject{
 
     public void  openArticleByName(String article_title){
         String article__xpath = getSavedArticleXpathByTitle(article_title);
-        this.waitForElementAndClick(By.xpath(article__xpath), "Article can't displaed", 15);
+        this.waitForElementAndClick((article__xpath), "Article can't displaed", 15);
     }
 
 
