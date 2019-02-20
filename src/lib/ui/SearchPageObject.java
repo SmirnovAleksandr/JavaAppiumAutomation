@@ -13,7 +13,7 @@ private static final String
     SEARCH_INIT_ELEMENT = "//*[contains(@text,'Search Wikipedia')]",
     SEARCH_INPUT = "//*[contains(@text,'Search…')]",
     SEARCH_CANCEL_BUTTON = "org.wikipedia:id/search_close_btn",
-    SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
+    SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container'][//*[@text='{TITLE}'] and //*[@text='{DESCRIPTION}']]",
     SEARCH_RESULT_ELEMENT = "//*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']",
     SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results found']",
     SEARCH_RESULT_ELEMENT_TITILE = "org.wikipedia:id/page_list_item_title"
@@ -29,7 +29,18 @@ public SearchPageObject(AppiumDriver driver){
 private  static  String getResultSearchElement(String substring){
     return  SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
 }
+
+    private  static  String getResultSearchElementByTitleAndDescription(String title, String description){
+        return  SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{TITLE}", title).replace( "{DESCRIPTION}",description);
+    }
 /* TEMPLATE METHODS */
+
+    public  void waitForElementByTitleAndDescription(String title, String description){
+        String Search_result_xpath =  getResultSearchElementByTitleAndDescription(title, description);
+
+        this.waitForElementPresent(By.xpath(Search_result_xpath), "Cannot find search result with title and description");
+    }
+
 
 
 public  void initSearchInput(){
